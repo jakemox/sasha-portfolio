@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import portfolioTheme from './theme/baseTheme'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider } from '@material-ui/core/styles'
+
+console.log(portfolioTheme)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={portfolioTheme}>
+     <CssBaseline />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

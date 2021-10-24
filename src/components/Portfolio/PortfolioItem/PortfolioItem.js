@@ -22,12 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const PortfolioItem = ({ index, image, columns, onClick }) => {
+const PortfolioItem = ({ index, image, columns }) => {
   const classes = useStyles()
 
   return (
     <Grid item xs={12} sm={columns} className={classes.portfolioItem}>
-      <img src={image} className={classes.image} onClick={() => onClick(index)} />
+      <img src={image} className={classes.image} />
     </Grid>
   )
 }

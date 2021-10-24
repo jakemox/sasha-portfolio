@@ -6,14 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import portfolioTheme from './theme/baseTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
-
-console.log(portfolioTheme)
+import SimpleReactLightbox from 'simple-react-lightbox'
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={portfolioTheme}>
      <CssBaseline />
-      <App />
+      <SimpleReactLightbox>
+        <App />
+      </SimpleReactLightbox>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

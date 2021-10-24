@@ -35,12 +35,18 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
     zIndex: 1,
   },
+  slideContainer: {
+    height: '100vh',
+    display: 'flex !important',
+    justifyContent: 'center',
+  },
   image: {
     maxWidth: '100%',
-    maxHeight: '86vh',
-    margin: '7vh auto',
+    // maxHeight: '86vh',
+    margin: '0 auto',
     width: 'unset !important',
     display: 'block !important',
+    objectFit: 'contain',
   },
 }));
 
@@ -49,14 +55,12 @@ const Carousel = ({isOpen, handleClose, initialSlide, slides}) => {
   const classes = useStyles();
 
   const sliderSettings = {
-    // centerMode: true,
     dots: false,
     infinite: true,
     initialSlide: initialSlide,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    // variableWidth: true,
   }
 
   return (
@@ -66,7 +70,6 @@ const Carousel = ({isOpen, handleClose, initialSlide, slides}) => {
       BackdropProps={{
         className: classes.backdropProps,
       }}
-      // BackdropComponent={Backdrop}
       onClose={handleClose}
       open={isOpen}
     >
@@ -85,10 +88,13 @@ const Carousel = ({isOpen, handleClose, initialSlide, slides}) => {
             {
               slides.map((slide, i) => {
                 return (
-                  <img key={i} src={slide.image} className={classes.image} />
+                  <Box className={classes.slideContainer}>
+                    <img key={i} src={slide.image} className={classes.image} />
+                  </Box>
                 )
               })
             }
+
           </Slider>
         </Box>
       </Box>

@@ -1,19 +1,12 @@
-// @flow
-
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Box, Button, Container, Toolbar } from '@material-ui/core'
 import Logo from '../../../assets/images/sasha-logo.png'
 import { Link } from 'react-router-dom'
-// import Header from 'theme/components/Header/Header'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    // flexGrow: 1,
     position: 'static',
-    // top: 0,
-    // left: 0,
     backgroundColor: theme.palette.common.white,
     color: theme.palette.primary.main
   },
@@ -40,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   aboutButton: {
-
     [theme.breakpoints.up('sm')]: {
       marginRight: '1rem',
     },
@@ -60,8 +52,12 @@ const Header = () => {
               <img alt="Sasha Moxon Logo" src={Logo} className={classes.logo}/>
             </Link>
           </Box>
-          <Button component={Link} to="/" color="inherit" className={classes.aboutButton}>About</Button>
-          <Button component={Link} to="/" color="inherit">Contact</Button>
+          <Button component={Link} to="/about" color="inherit" className={classes.aboutButton}>
+            About
+          </Button>
+          <Button href={'http://etsy.com/shop/sashamoxillustration'} target={'_blank'} color="inherit">
+            Shop
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>

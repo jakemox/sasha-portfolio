@@ -1,9 +1,8 @@
 // @flow
 
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
-import PortfolioItem from './PortfolioItem/PortfolioItem'
 import SeventiesFlower from '../../assets/images/70s-flower.jpg'
 import Accessories from '../../assets/images/accessories.jpg'
 import Assignment from '../../assets/images/assignment.jpg'
@@ -21,7 +20,7 @@ import PartridgeCard from '../../assets/images/partridge-card.jpg'
 import Poses from '../../assets/images/poses.jpg'
 import Robin from '../../assets/images/robin.jpg'
 import Tortoise from '../../assets/images/tortoise.jpg'
-import Carousel from './Carousel/Carousel'
+import { SRLWrapper } from 'simple-react-lightbox'
 
 const portfolioItems = [
   {
@@ -95,42 +94,39 @@ const portfolioItems = [
 ]
 
 const useStyles = makeStyles((theme) => ({
+  image: {
+    width: '100%',
+    height: '100%',
+    display: 'block',
+    objectFit: 'cover',
+    cursor: 'pointer',
+  },
 }));
+
+const options = {
+  buttons: {
+    backgroundColor: 'transparent',
+    iconColor: '#fff',
+    showDownloadButton: false,
+    showFullscreenButton: false,
+  },
+};
 
 
 const Portfolio = () => {
-  const classes = useStyles();
-  const [carouselIsOpen, setCarouselIsOpen] = useState(false)
-  const [carouselInitialSlide, setCarouselInitialSlide] = useState(0)
-
-  const handleCarouselOpen = (i) => {
-    setCarouselInitialSlide(i)
-    setCarouselIsOpen(true)
-  }
-
-  const handleCarouselClose = () => {
-    setCarouselIsOpen(false)
-  }
+  const classes = useStyles()
 
   return (
     <>
-      <Grid container spacing={2} className={classes.portfolio}>
-        {portfolioItems.map((item, i) =>
-          <PortfolioItem 
-            key={i}
-            index={i}
-            image={item.image}
-            columns={item.columns}
-            onClick={handleCarouselOpen}
-          />
-        )}
-      </Grid>
-      <Carousel 
-        isOpen={carouselIsOpen}
-        handleClose={handleCarouselClose}
-        initialSlide={carouselInitialSlide}
-        slides={portfolioItems}
-      />
+      <SRLWrapper options={options}>
+        <Grid container spacing={2} className={classes.portfolio}>
+            {portfolioItems.map((item, i) =>
+              <Grid item xs={12} sm={item.columns} className={classes.portfolioItem} key={i}>
+                <img src={item.image} className={classes.image} />
+              </Grid>
+            )}
+        </Grid>
+      </SRLWrapper>
     </>
   )
 }

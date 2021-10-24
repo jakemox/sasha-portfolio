@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@material-ui/core'
+import { createTheme } from '@material-ui/core'
 
-  const portfolioTheme = createMuiTheme({
+  const portfolioTheme = createTheme({
     breakpoints: {
       values: {
         xs: 0,

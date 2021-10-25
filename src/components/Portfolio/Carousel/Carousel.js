@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     maxWidth: '100%',
-    // maxHeight: '86vh',
     margin: '0 auto',
     width: 'unset !important',
     display: 'block !important',

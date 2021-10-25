@@ -36,24 +36,6 @@ import { createTheme } from '@material-ui/core'
       secondary: {
         main: '#f57e9c',
       },
-      // error: {
-      //   main: palette.error,
-      // },
-      // warning: {
-      //   light: '#ffe265',
-      //   main: '#f8b032',
-      //   dark: '#c08100',
-      // },
-      // info: {
-      //   light: '#5ee4e1',
-      //   main: palette.info,
-      //   dark: '#008180',
-      // },
-      // success: {
-      //   light: '#91d776',
-      //   main: palette.success,
-      //   dark: '#2f761a',
-      // },
       grey: {
         50: '#f8f8f8',
         100: '#f3f4f5',
@@ -67,10 +49,8 @@ import { createTheme } from '@material-ui/core'
         900: '#151a20',
       },
       text: {
-        // primary: palette.primary,
-        secondary: '#666c74',
-        // disabled: palette.getColorWithOpacity('primary', 0.4),
-        // hint: palette.getColorWithOpacity('primary', 0.4),
+        primary: '#414439',
+        secondary: '#f57e9c',
       },
       background: {
         default: '#fff',

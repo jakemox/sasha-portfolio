@@ -19,21 +19,23 @@ const ScrollToTopOnMount = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <Header />
-      <Container>
-        <ScrollToTopOnMount />
-        <Switch>
-          <Route
-            component={AboutPage}
-            path="/about" 
-          />
-          <Route
-            component={HomePage}
-            path="/" 
-          />
-        </Switch>
+      <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
+        <Header />
+        <Container>
+          <ScrollToTopOnMount />
+          <Switch>
+            <Route
+              component={AboutPage}
+              path="/about" 
+            />
+            <Route
+              component={HomePage}
+              path="/" 
+            />
+          </Switch>
+        </Container>
         <Footer />
-      </Container>
+      </div>
     </BrowserRouter>
   );
 }

@@ -2,16 +2,9 @@
 
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
-  portfolioItem: {
-    // height: 'auto',
-
-    [theme.breakpoints.up('lg')]: {
-      // height: '30rem',
-    },
-  },
   image: {
     width: '100%',
     height: '100%',
@@ -22,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const PortfolioItem = ({ index, image, columns }) => {
+const PortfolioItem = ({ image, columns }) => {
   const classes = useStyles()
 
   return (

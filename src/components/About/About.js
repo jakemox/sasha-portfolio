@@ -71,7 +71,7 @@ const About = () => {
           xl={5}
           xs={12}
         >
-          <img src={profilePicture} className={classes.image} />
+          <img src={profilePicture} className={classes.image} alt="Sasha Profile" />
         </Grid>
       </Grid>
     </Box>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect } from "react";
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Route, Switch, HashRouter } from 'react-router-dom'
 import HomePage from './containers/HomePage/HomePage'
 import AboutPage from './containers/AboutPage/AboutPage'
 import Container from '@material-ui/core/Container'
@@ -18,25 +18,26 @@ const ScrollToTopOnMount = () => {
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
         <Header />
         <Container>
           <ScrollToTopOnMount />
           <Switch>
             <Route
-              component={AboutPage}
-              path="/about" 
+              component={HomePage}
+              exact
+              path="/" 
             />
             <Route
-              component={HomePage}
-              path="/" 
+              component={AboutPage}
+              path="/about" 
             />
           </Switch>
         </Container>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

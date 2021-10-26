@@ -49,7 +49,7 @@ const Header = () => {
         <Toolbar className={classes.toolBar}>
           <Box display="flex" flexGrow={1}>
             <Link className={classes.logoLink} to="/">
-              <img alt="Sasha Moxon Logo" src={Logo} className={classes.logo}/>
+              <img src={Logo} className={classes.logo} alt="Sasha Moxon"/>
             </Link>
           </Box>
           <Button component={Link} to="/about" color="inherit" className={classes.aboutButton}>

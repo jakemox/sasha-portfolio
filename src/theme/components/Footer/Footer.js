@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2),
   },
   socialIcon: {
+    color: theme.palette.primary.main,
     transition: 'color .25s ease',
     '&:hover': {
       color: theme.palette.secondary.main,

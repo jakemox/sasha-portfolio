@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { Box, Grid, Typography } from '@material-ui/core'
+import { Box, Grid, Link, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import profilePicture from '../../assets/images/sasha-profile.jpg'
 
@@ -57,7 +57,7 @@ const About = () => {
           </Typography>
           <br />
           <Typography variant="body1">
-            For all enquiries please contact at sasha_moxon@hotmail.com.
+            For all enquiries please contact at <Link href="mailto:sasha_moxon@hotmail.com">sasha_moxon@hotmail.com</Link>.
           </Typography>
           </Box>
         </Grid>

@@ -103,6 +103,13 @@ import { createTheme } from '@material-ui/core'
         },
       },
     },
+    MuiLink: {
+      root: {
+        fontWeight: 500,
+        position: 'relative',
+        color: portfolioTheme.palette.text.secondary,
+      },
+    },
     MuiCssBaseline: {
       '@global': {
         html: {

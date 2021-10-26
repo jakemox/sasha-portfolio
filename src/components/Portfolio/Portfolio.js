@@ -146,6 +146,9 @@ const options = {
     showDownloadButton: false,
     showFullscreenButton: false,
   },
+  caption: {
+    showCaption: false,
+  }
 };
 
 

@@ -140,6 +140,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const options = {
+  settings: {
+    disablePanzoom: true,
+  },
   buttons: {
     backgroundColor: 'transparent',
     iconColor: '#fff',

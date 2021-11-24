@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 import { SRLWrapper } from 'simple-react-lightbox'
 
-import SeventiesFlower from '../../assets/images/70s-flower.jpg'
+import Baking from '../../assets/images/baking.jpg'
 import Bird from '../../assets/images/bird.jpg'
 import BirthdayFlower from '../../assets/images/birthday-flower.jpg'
 import BlueFlower from '../../assets/images/blue-flower.jpg'
@@ -39,6 +39,11 @@ const portfolioItems = [
   },
   {
     columns: 4,
+    image: Baking,
+    alt: 'Baking',
+  },
+  {
+    columns: 4,
     image: Poses,
     alt: 'Poses',
   },
@@ -46,11 +51,6 @@ const portfolioItems = [
     columns: 4,
     image: BobCover,
     alt: 'Bob Cover',
-  },
-  {
-    columns: 4,
-    image: PartridgeCard,
-    alt: 'Partridge Card',
   },
   {
     columns: 8,
@@ -73,6 +73,21 @@ const portfolioItems = [
     alt: 'Emotions',
   },
   {
+    columns: 4,
+    image: WildFlowers,
+    alt: 'Wild Flowers',
+  },
+  {
+    columns: 4,
+    image: MumFlower,
+    alt: 'Flower',
+  },
+  {
+    columns: 4,
+    image: PartridgeCard,
+    alt: 'Partridge Card',
+  },
+  {
     columns: 5,
     image: Robin,
     alt: 'Robin',
@@ -88,16 +103,6 @@ const portfolioItems = [
     alt: 'Bird',
   },
   {
-    columns: 5,
-    image: BlueFlower,
-    alt: 'Blue Flower',
-  },
-  {
-    columns: 7,
-    image: Butterfly,
-    alt: 'Butterfly',
-  },
-  {
     columns: 4,
     image: Marigold2,
     alt: 'Marigold',
@@ -111,21 +116,16 @@ const portfolioItems = [
     columns: 4,
     image: Marigold1,
     alt: 'Marigolds',
+  }, 
+  {
+    columns: 5,
+    image: BlueFlower,
+    alt: 'Blue Flower',
   },
   {
-    columns: 4,
-    image: SeventiesFlower,
-    alt: 'Seventies Flower',
-  },
-  {
-    columns: 4,
-    image: MumFlower,
-    alt: 'Flower',
-  },
-  {
-    columns: 4,
-    image: WildFlowers,
-    alt: 'Wild Flowers',
+    columns: 7,
+    image: Butterfly,
+    alt: 'Butterfly',
   },
 ]
 

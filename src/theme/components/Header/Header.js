@@ -1,21 +1,23 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Box, Button, Container, Toolbar } from '@material-ui/core'
-import Logo from '../../../assets/images/sasha-logo.png'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { AppBar, Box, Button, Container, Toolbar } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { useQuery } from "react-apollo";
+import { gql } from "apollo-boost";
+import { isPreview } from "../../../constants/constants";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    position: 'static',
+    position: "static",
     backgroundColor: theme.palette.common.white,
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   toolBar: {
-    height: 'auto',
-    padding: '1.5rem 0',
+    height: "auto",
+    padding: "1.5rem 0",
 
-    [theme.breakpoints.up('md')]: {
-      padding: '2rem 0',
+    [theme.breakpoints.up("md")]: {
+      padding: "2rem 0",
     },
   },
   menuButton: {
@@ -25,23 +27,48 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   logo: {
-    display: 'block',
-    height: '1.25rem',
+    display: "block",
+    height: "1.25rem",
 
-    [theme.breakpoints.up('sm')]: {
-      height: '1.5rem',
+    [theme.breakpoints.up("sm")]: {
+      height: "1.5rem",
     },
   },
   aboutButton: {
-    [theme.breakpoints.up('sm')]: {
-      marginRight: '1rem',
+    [theme.breakpoints.up("sm")]: {
+      marginRight: "1rem",
     },
   },
 }));
 
+const HeaderQuery = gql`
+  query HeaderData {
+    headerCollection(limit: 1, preview: ${isPreview}) {
+      items {
+        name
+        logo {
+          title
+          description
+          url
+        }
+        navigationLinksCollection {
+          items {
+            text
+            url
+            linkType
+          }
+        }
+      }
+    }
+  }
+`;
 
 const Header = () => {
   const classes = useStyles();
+  const { data } = useQuery(HeaderQuery);
+
+  const headerData = data?.headerCollection?.items[0];
+  const { logo, navigationLinksCollection } = headerData || {};
 
   return (
     <AppBar elevation={0} className={classes.appBar}>
@@ -49,19 +76,34 @@ const Header = () => {
         <Toolbar className={classes.toolBar}>
           <Box display="flex" flexGrow={1}>
             <Link className={classes.logoLink} to="/">
-              <img src={Logo} className={classes.logo} alt="Sasha Moxon"/>
+              {logo && (
+                <img
+                  src={logo.url}
+                  className={classes.logo}
+                  alt={logo.description}
+                />
+              )}
             </Link>
           </Box>
-          <Button component={Link} to="/about" color="inherit" className={classes.aboutButton}>
-            About
-          </Button>
-          <Button href={'http://etsy.com/shop/sashamoxillustration'} target={'_blank'} color="inherit">
-            Shop
-          </Button>
+          {navigationLinksCollection?.items.map(
+            ({ url, text, linkType }, index) => (
+              <Button
+                key={index}
+                component={linkType === "Internal" ? Link : "a"}
+                to={linkType === "Internal" ? url : undefined}
+                href={linkType !== "Internal" ? url : undefined}
+                target={linkType === "External" ? "_blank" : ""}
+                color="inherit"
+                className={classes.aboutButton}
+              >
+                {text}
+              </Button>
+            )
+          )}
         </Toolbar>
       </Container>
     </AppBar>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

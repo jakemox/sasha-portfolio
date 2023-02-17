@@ -1,49 +1,14 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Box, Button, Container, Toolbar } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { useQuery } from "react-apollo";
-import { gql } from "apollo-boost";
-import { isPreview } from "../../../constants/constants";
-
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    position: "static",
-    backgroundColor: theme.palette.common.white,
-    color: theme.palette.primary.main,
-  },
-  toolBar: {
-    height: "auto",
-    padding: "1.5rem 0",
-
-    [theme.breakpoints.up("md")]: {
-      padding: "2rem 0",
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  logo: {
-    display: "block",
-    height: "1.25rem",
-
-    [theme.breakpoints.up("sm")]: {
-      height: "1.5rem",
-    },
-  },
-  aboutButton: {
-    [theme.breakpoints.up("sm")]: {
-      marginRight: "1rem",
-    },
-  },
-}));
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { AppBar, Box, Button, Container, Toolbar } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { useQuery } from 'react-apollo'
+import { gql } from 'apollo-boost'
+import { isPreview } from '../../../constants/constants'
 
 const HeaderQuery = gql`
-  query HeaderData {
-    headerCollection(limit: 1, preview: ${isPreview}) {
+  query HeaderData($limit: Int!, $preview: Boolean!) {
+    headerCollection(limit: $limit, preview: $preview) {
       items {
         name
         logo {
@@ -61,21 +26,60 @@ const HeaderQuery = gql`
       }
     }
   }
-`;
+`
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    position: 'static',
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.primary.main,
+  },
+  toolBar: {
+    height: 'auto',
+    padding: '1.5rem 0',
+
+    [theme.breakpoints.up('md')]: {
+      padding: '2rem 0',
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  logo: {
+    display: 'block',
+    height: '1.25rem',
+
+    [theme.breakpoints.up('sm')]: {
+      height: '1.5rem',
+    },
+  },
+  button: {
+    '&:not(:last-of-type)': {
+      [theme.breakpoints.up('sm')]: {
+        marginRight: '1rem',
+      },
+    },
+  },
+}))
 
 const Header = () => {
-  const classes = useStyles();
-  const { data } = useQuery(HeaderQuery);
+  const classes = useStyles()
+  const { data } = useQuery(HeaderQuery, {
+    variables: { limit: 1, preview: isPreview },
+  })
 
-  const headerData = data?.headerCollection?.items[0];
-  const { logo, navigationLinksCollection } = headerData || {};
+  const { logo, navigationLinksCollection } =
+    data?.headerCollection?.items[0] || {}
 
   return (
     <AppBar elevation={0} className={classes.appBar}>
       <Container>
         <Toolbar className={classes.toolBar}>
-          <Box display="flex" flexGrow={1}>
-            <Link className={classes.logoLink} to="/">
+          <Box display='flex' flexGrow={1}>
+            <Link className={classes.logoLink} to='/'>
               {logo && (
                 <img
                   src={logo.url}
@@ -89,12 +93,12 @@ const Header = () => {
             ({ url, text, linkType }, index) => (
               <Button
                 key={index}
-                component={linkType === "Internal" ? Link : "a"}
-                to={linkType === "Internal" ? url : undefined}
-                href={linkType !== "Internal" ? url : undefined}
-                target={linkType === "External" ? "_blank" : ""}
-                color="inherit"
-                className={classes.aboutButton}
+                component={linkType === 'Internal' ? Link : 'a'}
+                to={linkType === 'Internal' ? url : undefined}
+                href={linkType !== 'Internal' ? url : undefined}
+                target={linkType === 'External' ? '_blank' : ''}
+                color='inherit'
+                className={classes.button}
               >
                 {text}
               </Button>
@@ -103,7 +107,7 @@ const Header = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

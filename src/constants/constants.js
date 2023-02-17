@@ -1,4 +1,4 @@
-export const isPreview = process.env.NODE_EN !== "production";
+export const isPreview = process.env.NODE_EN !== 'production'
 
 export const graphqlClient = {
   uri: `https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}`,
@@ -9,4 +9,4 @@ export const graphqlClient = {
         : process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN
     }`,
   },
-};
+}

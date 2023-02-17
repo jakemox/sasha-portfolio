@@ -3,8 +3,8 @@
 import React from 'react'
 import Portfolio from '../../components/Portfolio/Portfolio'
 
-const HomePage = () => (
-  <Portfolio />
-)
+const HomePage = () => {
+  return <Portfolio />
+}
 
 export default HomePage

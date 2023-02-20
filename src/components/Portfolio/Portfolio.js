@@ -113,20 +113,18 @@ import PortfolioImage from './PortfolioImage'
 // ]
 
 const PortfolioQuery = gql`
-  query PortfolioData($limit: Int!, $preview: Boolean!) {
-    portfolioCollection(limit: $limit, preview: $preview) {
-      items {
-        portfolioItemsCollection {
-          items {
+  query PortfolioData($preview: Boolean!, $id: String!) {
+    portfolio(preview: $preview, id: $id) {
+      portfolioItemsCollection {
+        items {
+          title
+          image {
             title
-            image {
-              title
-              url
-            }
-            imagePositionX
-            imagePositionY
-            columns
+            url
           }
+          imagePositionX
+          imagePositionY
+          columns
         }
       }
     }
@@ -148,24 +146,18 @@ const options = {
   },
 }
 
-const Portfolio = () => {
+const Portfolio = ({ id }) => {
   const { data, error, loading } = useQuery(PortfolioQuery, {
     variables: {
-      limit: 1,
       preview: isPreview,
+      id,
     },
   })
 
-  if (loading) {
-    return <LoadingOverlay />
-  }
+  if (loading) return <LoadingOverlay />
+  if (error) return <p>Error: {error.message}</p>
 
-  if (error) {
-    return <p>Error: {error.message}</p>
-  }
-
-  const portfolioItems =
-    data?.portfolioCollection.items[0].portfolioItemsCollection.items
+  const portfolioItems = data?.portfolio.portfolioItemsCollection.items
 
   return (
     <SRLWrapper options={options}>

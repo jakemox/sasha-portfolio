@@ -7,7 +7,7 @@ import ApolloClient, {
 } from 'apollo-boost'
 import { ApolloProvider, useQuery } from 'react-apollo'
 import introspectionQueryResultData from './fragmentTypes.json'
-import { Route, Switch, HashRouter } from 'react-router-dom'
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import Page from './containers/Page/Page'
 import Container from '@material-ui/core/Container'
 import './App.css'
@@ -58,7 +58,7 @@ const PagesQuery = gql`
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <HashRouter>
+      <BrowserRouter>
         <div
           style={{
             minHeight: '100vh',
@@ -75,7 +75,7 @@ const App = () => {
           </Container>
           <Footer />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </ApolloProvider>
   )
 }

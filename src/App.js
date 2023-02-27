@@ -56,7 +56,6 @@ const PagesQuery = gql`
 `
 
 const App = () => {
-  console.log(process.env.PUBLIC_URL)
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>

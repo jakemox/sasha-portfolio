@@ -1,0 +1,15 @@
+query footer($limit: Int!, $preview: Boolean!) {
+  footerCollection(limit: $limit, preview: $preview) {
+    items {
+      socialMediaLinksCollection {
+        items {
+          socialMediaSite
+          url
+        }
+      }
+      copyrightText {
+        text
+      }
+    }
+  }
+}

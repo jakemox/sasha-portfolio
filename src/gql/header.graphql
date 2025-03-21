@@ -1,0 +1,19 @@
+query header($limit: Int!, $preview: Boolean!) {
+  headerCollection(limit: $limit, preview: $preview) {
+    items {
+      name
+      logo {
+        title
+        description
+        url
+      }
+      navigationLinksCollection {
+        items {
+          text
+          url
+          linkType
+        }
+      }
+    }
+  }
+}

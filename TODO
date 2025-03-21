@@ -1,0 +1,17 @@
+- CSS variables
+- LoadingSkeleton
+- Image 2x size and height/width
+- Button hover and focus effects
+- Accessibility
+- Testing
+- Vite readme
+
+From Sasha:
+•⁠ ⁠A flower to spin for loading
+•⁠ ⁠⁠Some sort of underline or other decoration for links (or just for links that are being hovered
+•⁠ ⁠⁠Illustrated arrow and hand cursors
+•⁠ ⁠⁠Font for headings?
+•⁠ ⁠⁠Images to use in animated footer
+•⁠ ⁠⁠Animated logo gif?
+•⁠ ⁠⁠Could also be cool to have some illustrated icon buttons like a cross to close the lightbox and arrows to navigate to the next image. They would need to be SVGs though
+•⁠ ⁠Think about if you want a hero component to go at the top of all/some pages

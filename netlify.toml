@@ -1,3 +1,6 @@
+[build]
+  command = "yarn codegen && yarn build"
+
 [dev]
   targetPort = 4173
   port = 8888

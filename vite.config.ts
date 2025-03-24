@@ -4,7 +4,6 @@ import viteTsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
-  // depending on your application, base can also be "/"
   base: '',
   plugins: [
     react({
@@ -18,9 +17,14 @@ export default defineConfig({
     svgr(),
   ],
   server: {
-    // this ensures that the browser opens upon server start
     open: true,
-    // this sets a default port to 3000
     port: 3000,
+    proxy: {
+      // Proxy requests to .netlify/functions to the server running on port 8888
+      '/.netlify/functions': {
+        target: 'http://localhost:8888', // Target for Netlify functions
+        changeOrigin: true, // Ensures the request looks like it's from the same origin
+      },
+    },
   },
 })

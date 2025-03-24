@@ -2,13 +2,16 @@
 - LoadingSkeleton
 - Image 2x size and height/width
 - Button hover and focus effects
+- Sticky header
+- Loading general state. Redux?
 - Accessibility
 - Testing
 - Vite readme
+- Flower loading spinner
+- Text underline
+- Update node version
 
 From Sasha:
-•⁠ ⁠A flower to spin for loading
-•⁠ ⁠⁠Some sort of underline or other decoration for links (or just for links that are being hovered
 •⁠ ⁠⁠Illustrated arrow and hand cursors
 •⁠ ⁠⁠Font for headings?
 •⁠ ⁠⁠Images to use in animated footer

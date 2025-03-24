@@ -6,14 +6,12 @@ import Icon from '../common/icon/Icon'
 import type { CTAProps } from '../styled/CtaStyles'
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, CTAProps {
-  isExternal?: boolean
   icon?: string
   asButtonStyle?: boolean
 }
 
 const Link: FC<PropsWithChildren<LinkProps>> = ({
   href,
-  isExternal = false,
   variant,
   icon,
   iconOnly = false,
@@ -27,6 +25,11 @@ const Link: FC<PropsWithChildren<LinkProps>> = ({
     asButton: asButtonStyle,
     ...rest,
   }
+
+  const isExternal =
+    href.toString().startsWith('http') ||
+    href.toString().startsWith('mailto') ||
+    href.toString().startsWith('tel')
 
   const linkContent = (
     <>

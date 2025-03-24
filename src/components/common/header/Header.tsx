@@ -21,11 +21,9 @@ const Header: FC = () => {
       <Navigation element="nav">
         <Link href="/">{logo && <Logo src={logo.url} alt={logo.description} />}</Link>
         <NavLinks>
-          {navigationLinksCollection?.items.map(({ url, text, linkType }, i) => (
+          {navigationLinksCollection?.items.map(({ url, text }, i) => (
             <NavItem key={i}>
-              <NavLink href={url} isExternal={linkType !== 'Internal'}>
-                {text}
-              </NavLink>
+              <NavLink href={url}>{text}</NavLink>
             </NavItem>
           ))}
         </NavLinks>

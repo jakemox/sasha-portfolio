@@ -21,7 +21,7 @@ const Footer: FC = () => {
         <SocialIcons>
           {socialMediaLinksCollection?.items.map(({ socialMediaSite, url }, i) => (
             <li key={i}>
-              <SocialIconLink href={url} isExternal icon={socialMediaSite.toLowerCase()} iconOnly />
+              <SocialIconLink href={url} icon={socialMediaSite.toLowerCase()} iconOnly />
             </li>
           ))}
         </SocialIcons>

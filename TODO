@@ -1,4 +1,6 @@
-- Max-width container
+- Hamburger
+- Portfolio image ratios
+- Animated footer
 - CSS variables
 - LoadingSkeleton
 - Image 2x size and height/width
@@ -7,10 +9,8 @@
 - Loading general state. Redux?
 - Accessibility
 - Testing
-- Vite readme
 - Flower loading spinner
 - Text underline
-- Update node version
 
 From Sasha:
 •⁠ ⁠⁠Illustrated arrow and hand cursors

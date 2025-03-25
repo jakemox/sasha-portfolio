@@ -16,6 +16,9 @@ export const handler = async (event: any) => {
     const SPACE_ID = process.env.VITE_APP_CONTENTFUL_SPACE_ID
     const ACCESS_TOKEN = process.env.VITE_APP_CONTENTFUL_ACCESS_TOKEN
 
+    console.log('Space ID:', SPACE_ID)
+    console.log('Access Token:', ACCESS_TOKEN)
+
     const response = await fetch(`https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}`, {
       method: 'POST',
       headers: {

@@ -1,1 +1,1 @@
-export const isPreview = import.meta.env.NODE_ENV !== 'production'
+export const isPreview = import.meta.env.DEV

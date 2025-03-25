@@ -1,0 +1,33 @@
+query Pages($preview: Boolean!) {
+  pageCollection(preview: $preview) {
+    items {
+      sys {
+        id
+      }
+      title
+      slug
+      path
+    }
+  }
+}
+
+query Page($preview: Boolean!, $id: String!) {
+  page(preview: $preview, id: $id) {
+    contentCollection {
+      items {
+        ... on ImageAndText {
+          sys {
+            id
+          }
+          __typename
+        }
+        ... on Portfolio {
+          sys {
+            id
+          }
+          __typename
+        }
+      }
+    }
+  }
+}

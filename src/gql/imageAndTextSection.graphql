@@ -1,0 +1,19 @@
+#import "./fragments/richTextFragment.graphql"
+
+query ImageAndTextSection($preview: Boolean!, $id: String!) {
+  imageAndText(preview: $preview, id: $id) {
+    heading {
+      text
+    }
+    body {
+      ...RichText
+    }
+    imageWrapper {
+      image {
+        title
+        url
+      }
+      focusArea
+    }
+  }
+}

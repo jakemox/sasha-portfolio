@@ -1,6 +1,8 @@
-import type { FC } from 'react'
+import { lazy, type FC } from 'react'
 import styled from '@emotion/styled'
-import loadable from '@loadable/component'
+
+const EtsyIcon = lazy(() => import('../../../assets/icons/icon-etsy.svg?react'))
+const InstagramIcon = lazy(() => import('../../../assets/icons/icon-instagram.svg?react'))
 
 interface IconProps {
   name: string
@@ -11,8 +13,8 @@ type IconName = 'etsy' | 'instagram'
 type IconComponentType = React.FC<React.SVGProps<SVGSVGElement>>
 
 const iconNameToComponent: Record<IconName, IconComponentType> = {
-  etsy: loadable(() => import('../../../assets/icons/icon-etsy.svg?react')),
-  instagram: loadable(() => import('../../../assets/icons/icon-instagram.svg?react')),
+  etsy: EtsyIcon,
+  instagram: InstagramIcon,
 }
 
 const Icon: FC<IconProps> = ({ name, className }) => {

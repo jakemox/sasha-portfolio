@@ -1,0 +1,10 @@
+fragment Image on ImageWrapper {
+  title
+  image {
+    title
+    url
+    width
+    height
+  }
+  focusArea
+}

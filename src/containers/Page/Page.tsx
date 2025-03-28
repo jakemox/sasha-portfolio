@@ -1,28 +1,27 @@
-import type { FC } from 'react'
-import { useQuery } from '@apollo/client'
-// import LoadingOverlay from '../../components/LoadingOverlay'
+import { lazy, type FC } from 'react'
+import { useSuspenseQuery } from '@apollo/client'
 import { isPreview } from '../../constants/constants'
-import loadable from '@loadable/component'
-
 import { PageDocument } from '../../gql/generated/graphql'
 import type { PageQuery, PageQueryVariables } from '../../gql/generated/graphql'
+
+const Portfolio = lazy(() => import('../../sections/portfolio/Portfolio'))
+const ImageAndText = lazy(() => import('../../sections/imageAndText/ImageAndText'))
 
 interface PageProps {
   id: string
 }
 
 const Page: FC<PageProps> = ({ id }) => {
-  const { data, error, loading } = useQuery<PageQuery, PageQueryVariables>(PageDocument, {
+  const { data, error } = useSuspenseQuery<PageQuery, PageQueryVariables>(PageDocument, {
     variables: {
       preview: isPreview,
       id,
     },
   })
 
-  // TODO Needed twice?
-  if (loading) return null
-  // if (loading) return <LoadingOverlay />
   if (error) return <p>Error: {error.message}</p>
+
+  if (!data?.page) return null
 
   const { contentCollection } = data.page || {}
 
@@ -57,9 +56,9 @@ const Section: FC<SectionProps> = ({ id, typename }) => {
 const typenameToComponent = (typename: string): FC<{ id: string }> | null => {
   switch (typename) {
     case 'Portfolio':
-      return loadable(() => import('../../sections/portfolio/Portfolio'))
+      return Portfolio
     case 'ImageAndText':
-      return loadable(() => import('../../sections/imageAndText/ImageAndText'))
+      return ImageAndText
     default:
       return null
   }

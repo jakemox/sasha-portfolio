@@ -1,15 +1,12 @@
+#import "./fragments/imageFragment.graphql"
+
 query PortfolioSection($preview: Boolean!, $id: String!) {
   portfolio(preview: $preview, id: $id) {
     portfolioItemsCollection {
       items {
         title
         portfolioImage {
-          title
-          image {
-            title
-            url
-          }
-          focusArea
+          ...Image
         }
         columns
       }

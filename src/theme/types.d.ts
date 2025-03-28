@@ -1,3 +1,5 @@
+import type { CSSObject } from '@emotion/react'
+
 export type ElementSize = 'xs' | 'sm' | 'md' | 'lg'
 
 export type ElementVariant = 'solid' | 'accent' | 'inverse' | 'disabled'
@@ -43,15 +45,13 @@ export type ThemeColors = {
   }
 }
 
-type TextStyle = Record<string, string>
-
 export type ThemeTypography = {
   fontFamily: string
   fontSizes: Record<string, string>
   fontWeights: Record<string, number>
   lineHeights: Record<string, number>
   letterSpacings: Record<string, string>
-  textStyles: Record<string, TextStyle>
+  textStyles: Record<string, CSSObject>
 }
 
 export type ThemeGutters = {

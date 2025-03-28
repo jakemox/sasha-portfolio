@@ -38,6 +38,8 @@ const StyledHeader = styled.header`
   background-color: ${themeColors.bg.primary};
   color: ${themeColors.text.primary};
   position: sticky;
+  top: 0;
+  z-index: 10;
 `
 
 const Navigation = styled(Container)`

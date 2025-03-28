@@ -1,16 +1,14 @@
 - Hamburger
-- Portfolio image ratios
 - Animated footer
 - CSS variables
-- LoadingSkeleton
 - Image 2x size and height/width
 - Button hover and focus effects
+- Portfolio hover effects
 - Sticky header
-- Loading general state. Redux?
 - Accessibility
 - Testing
-- Flower loading spinner
 - Text underline
+- Migrate to Next?
 
 From Sasha:
 •⁠ ⁠⁠Illustrated arrow and hand cursors

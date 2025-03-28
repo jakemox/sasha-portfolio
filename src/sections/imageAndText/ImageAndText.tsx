@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import styled from '@emotion/styled'
 import { isPreview } from '../../constants/constants'
 import { ImageAndTextSectionDocument } from '../../gql/generated/graphql'
@@ -16,7 +16,7 @@ import type { ContentfulImageApiParams } from '../../lib/contentfulImage'
 
 // TODO Turn this into generic 2 column layout?
 const ImageAndText = ({ id }) => {
-  const { data } = useQuery<ImageAndTextSectionQuery, ImageAndTextSectionQueryVariables>(
+  const { data } = useSuspenseQuery<ImageAndTextSectionQuery, ImageAndTextSectionQueryVariables>(
     ImageAndTextSectionDocument,
     {
       variables: {

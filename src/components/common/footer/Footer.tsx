@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { useQuery } from '@apollo/client'
+import { useSuspenseQuery } from '@apollo/client'
 import { isPreview } from '../../../constants/constants'
 import Container from '../grid/Container'
 import styled from '@emotion/styled'
@@ -9,7 +9,7 @@ import Link from '../../ctas/Link'
 import { themeColors } from '../../../theme/colors'
 
 const Footer: FC = () => {
-  const { data } = useQuery<FooterQuery, FooterQueryVariables>(FooterDocument, {
+  const { data } = useSuspenseQuery<FooterQuery, FooterQueryVariables>(FooterDocument, {
     variables: { limit: 1, preview: isPreview },
   })
 

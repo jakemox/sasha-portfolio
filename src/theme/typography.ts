@@ -1,12 +1,37 @@
 import { themeColors } from './colors'
 import type { ThemeTypography } from './types'
+import TextUnderline from '../assets/text-underline.png'
+import { keyframes } from '@emotion/react'
+
+const underlineAnimation = keyframes`
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+`
 
 const headingStyles = {
   fontWeight: '500',
   lineHeight: '1.2',
   marginBottom: '0.35em',
   color: themeColors.text.secondary,
-}
+  position: 'relative',
+  width: 'fit-content',
+
+  '::after': {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    height: '0.125em',
+    backgroundImage: `url(${TextUnderline})`,
+    backgroundSize: 'auto 100%',
+    animation: `${underlineAnimation} 1s ease forwards`,
+  },
+} as const
 
 const textStyles = {
   fontWeight: '400',

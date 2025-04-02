@@ -4,6 +4,7 @@
 - Button hover and focus effects
 - Fix font issue on prod
 - Portfolio hover effects
+- Add custom button to Lightbox
 - Accessibility
 - Testing
 - Migrate to Next or SSR?

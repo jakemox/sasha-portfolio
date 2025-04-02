@@ -41,7 +41,7 @@ const textStyles = {
 }
 
 const typography: ThemeTypography = {
-  fontFamily: "'Jost', sans-serif",
+  fontFamily: "'Jost Variable', sans-serif",
   fontSizes: {
     xs: '0.75rem',
     sm: '0.875rem',

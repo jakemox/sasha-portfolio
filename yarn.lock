@@ -624,6 +624,11 @@
     "@eslint/core" "^0.12.0"
     levn "^0.4.1"
 
+"@fontsource-variable/jost@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/jost/-/jost-5.2.5.tgz#c2aafdd7db655aad827273ec8211dff701ffe0d7"
+  integrity sha512-oIMcK8O9zEhGXR0wrqNLPotRb4uI7ixfQtrBF03kZyYtdIrLBAuEJuRfHWZAZiH2iKnXco1atEGNuHgM7PDN0g==
+
 "@graphql-codegen/add@^5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/add/-/add-5.0.3.tgz#1ede6bac9a93661ed7fa5808b203d079e1b1d215"

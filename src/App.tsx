@@ -11,6 +11,7 @@ import { isPreview } from './constants/constants'
 import { PagesDocument, type PagesQuery, type PagesQueryVariables } from './gql/generated/graphql'
 import 'yet-another-react-lightbox/styles.css'
 import LoadingOverlay from './components/LoadingOverlay'
+import '@fontsource-variable/jost'
 
 const AppContainer = styled.div`
   min-height: 100vh;

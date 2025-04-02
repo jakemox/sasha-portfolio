@@ -1,4 +1,5 @@
-import { Suspense, useMemo } from 'react'
+import { type FC, Suspense, useEffect, useMemo } from 'react'
+import { useLocation } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { ApolloProvider, useSuspenseQuery } from '@apollo/client'
 import createApolloClient from './lib/apolloClient'
@@ -18,12 +19,23 @@ const AppContainer = styled.div`
   transition: height 5s ease;
 `
 
+const ScrollToTop: FC = () => {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
 function App() {
   const client = useMemo(() => createApolloClient(), [])
 
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
+        <ScrollToTop />
         <AppContainer>
           <Header />
           <Suspense fallback={<LoadingOverlay />}>

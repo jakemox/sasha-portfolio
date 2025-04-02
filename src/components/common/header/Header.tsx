@@ -13,11 +13,11 @@ import Button from '../../ctas/Button'
 
 const Header: FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
-  const location = useLocation()
+  const { pathname } = useLocation()
 
   useEffect(() => {
     setMenuOpen(false)
-  }, [location.pathname])
+  }, [pathname])
 
   const { data } = useQuery<HeaderQuery, HeaderQueryVariables>(HeaderDocument, {
     variables: { limit: 1, preview: isPreview },

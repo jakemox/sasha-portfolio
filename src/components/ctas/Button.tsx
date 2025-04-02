@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
 import styled from '@emotion/styled'
 import { buttonStyles, linkStyles } from '../styled/CtaStyles'
+import Icon from '../common/icon/Icon'
 import type { CTAProps } from '../styled/CtaStyles'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, CTAProps {
@@ -18,12 +19,12 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
   const buttonContent = (
     <>
       {!iconOnly && children && <>{children}</>}
-      {icon}
+      {icon && <Icon name={icon} />}
     </>
   )
 
   return (
-    <StyledButton asLink={asLinkStyle} {...rest}>
+    <StyledButton asLink={asLinkStyle} iconOnly={iconOnly} {...rest}>
       {buttonContent}
     </StyledButton>
   )

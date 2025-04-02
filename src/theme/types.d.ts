@@ -2,7 +2,7 @@ import type { CSSObject } from '@emotion/react'
 
 export type ElementSize = 'xs' | 'sm' | 'md' | 'lg'
 
-export type ElementVariant = 'solid' | 'accent' | 'inverse' | 'disabled'
+export type ElementVariant = 'solid' | 'outline' | 'ghost' | 'accent' | 'inverse' | 'disabled'
 
 export type ElementLayout = 'default' | 'inline'
 

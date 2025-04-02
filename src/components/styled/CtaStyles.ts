@@ -36,14 +36,14 @@ const buttonPaddingMap: { [size in ElementSize]: ButtonPadding } = {
   md: defaultButtonPadding,
   lg: { x: '2rem', y: '1rem' },
 }
-const buttonPaddingBySize = (size: ElementSize) => {
+const buttonPaddingBySize = (size: ElementSize, iconOnly?: boolean) => {
   const { x, y } = buttonPaddingMap[size] || defaultButtonPadding
   return css`
-    padding: ${y} ${x};
+    padding: ${y} ${!iconOnly && x};
   `
 }
 
-export const buttonStyles = ({ variant = 'solid', size }: CTAProps) => {
+export const buttonStyles = ({ variant = 'solid', size, iconOnly }: CTAProps) => {
   const isInverse = variant === 'inverse'
   const style = isInverse ? 'inverse' : 'primary'
   const buttonColors = themeColors.button[variant] || themeColors.button[style]
@@ -53,18 +53,21 @@ export const buttonStyles = ({ variant = 'solid', size }: CTAProps) => {
       : themeColors.text.primary
   const colorMain = buttonColors.default
   const colorHover = buttonColors.hover
+  const transparent = variant === 'outline' || variant === 'ghost'
 
   return css`
-    ${buttonPaddingBySize(size || 'md')};
+    ${buttonPaddingBySize(size || 'md', iconOnly)};
     ${commonCtaStyles};
     display: flex;
     transition: color 0.2s ease;
     font-size: ${typography.fontSizes.base};
-    background-color: ${colorMain};
+    border-radius: ${iconOnly ? '100vmax' : '0'};
+    background-color: ${transparent ? 'transparent' : colorMain};
     color: ${colorText};
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
+    cursor: pointer;
 
     &:hover {
       background-color: ${colorHover};

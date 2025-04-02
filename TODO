@@ -2,10 +2,11 @@
 - CSS variables
 - Image 2x size and height/width
 - Button hover and focus effects
+- Fix font issue on prod
 - Portfolio hover effects
 - Accessibility
 - Testing
-- Migrate to Next?
+- Migrate to Next or SSR?
 
 From Sasha:
 •⁠ ⁠⁠Illustrated arrow and hand cursors

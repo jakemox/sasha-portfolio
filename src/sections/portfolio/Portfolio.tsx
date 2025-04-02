@@ -25,6 +25,7 @@ interface PortfolioProps {
 
 const Portfolio: FC<PortfolioProps> = ({ id }) => {
   console.log(isPreview)
+  console.log(import.meta.env.VITE_ENV)
 
   const [lightboxIndex, setLightboxIndex] = useState<number>(0)
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false)

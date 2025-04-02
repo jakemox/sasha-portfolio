@@ -4,3 +4,17 @@
 [dev]
   targetPort = 4173
   port = 8888
+  VITE_ENV = "dev"
+
+[context.production.environment]
+  VITE_ENV = "prod"
+  NODE_ENV = "production"
+
+[context.staging.environment]
+  VITE_ENV = "staging"
+
+[context.deploy-preview.environment]
+  VITE_ENV = "staging"
+
+[context.branch-deploy.environment]
+  VITE_ENV = "dev"

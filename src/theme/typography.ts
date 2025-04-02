@@ -2,6 +2,7 @@ import { themeColors } from './colors'
 import type { ThemeTypography } from './types'
 import TextUnderline from '../assets/text-underline.png'
 import { keyframes } from '@emotion/react'
+import { breakpoints } from './breakpoints'
 
 const underlineAnimation = keyframes`
   from {
@@ -68,28 +69,52 @@ const typography: ThemeTypography = {
   textStyles: {
     // TODO Get dynamic values
     h1: {
-      fontSize: '3rem',
       ...headingStyles,
+      fontSize: '2.25rem',
+
+      [`@media (min-width: ${breakpoints.md.minWidth})`]: {
+        fontSize: '3rem',
+      },
     },
     h2: {
-      fontSize: '2.25rem',
       ...headingStyles,
+      fontSize: '1.875rem',
+
+      [`@media (min-width: ${breakpoints.md.minWidth})`]: {
+        fontSize: '2.25rem',
+      },
     },
     h3: {
-      fontSize: '1.875rem',
       ...headingStyles,
+      fontSize: '1.5rem',
+
+      [`@media (min-width: ${breakpoints.md.minWidth})`]: {
+        fontSize: '1.875rem',
+      },
     },
     h4: {
-      fontSize: '1.5rem',
       ...headingStyles,
+      fontSize: '1.25rem',
+
+      [`@media (min-width: ${breakpoints.md.minWidth})`]: {
+        fontSize: '1.5rem',
+      },
     },
     h5: {
-      fontSize: '1.25rem',
       ...headingStyles,
+      fontSize: '1.125rem',
+
+      [`@media (min-width: ${breakpoints.md.minWidth})`]: {
+        fontSize: '1.25rem',
+      },
     },
     h6: {
-      fontSize: '1.125rem',
       ...headingStyles,
+      fontSize: '1rem',
+
+      [`@media (min-width: ${breakpoints.md.minWidth})`]: {
+        fontSize: '1.125rem',
+      },
     },
     body1: {
       fontSize: '1rem',

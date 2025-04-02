@@ -18,6 +18,7 @@ export const commonColors = {
 const themePalette = {
   darkBrown: '#414439',
   pink: '#f57e9c',
+  purple: '#b870a1',
 } as const
 
 const {
@@ -33,13 +34,13 @@ const {
   neutral0,
 } = commonColors
 
-const { darkBrown, pink } = themePalette
+const { darkBrown, pink, purple } = themePalette
 
 export const themeColors: ThemeColors = {
   text: {
     primary: darkBrown,
     inverse: neutral0,
-    secondary: pink,
+    secondary: purple,
     disabled: neutral40,
   },
   bg: {
@@ -51,7 +52,7 @@ export const themeColors: ThemeColors = {
     primary: darkBrown,
     inverse: neutral0,
     disabled: neutral40,
-    accent: pink,
+    accent: purple,
   },
   button: {
     primary: {
@@ -63,8 +64,8 @@ export const themeColors: ThemeColors = {
       hover: neutral10,
     },
     accent: {
-      default: pink,
-      hover: pink,
+      default: purple,
+      hover: purple,
     },
     disabled: neutral20,
   },

@@ -1,13 +1,12 @@
-- Hamburger (Wait for new header design)
 - Animated footer
 - CSS variables
 - Image 2x size and height/width
 - Button hover and focus effects
+- Fix font issue on prod
 - Portfolio hover effects
-- Sticky header
 - Accessibility
 - Testing
-- Migrate to Next?
+- Migrate to Next or SSR?
 
 From Sasha:
 •⁠ ⁠⁠Illustrated arrow and hand cursors

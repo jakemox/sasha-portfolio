@@ -1,6 +1,8 @@
 import { lazy, type FC } from 'react'
 import styled from '@emotion/styled'
 
+const HamburgerIcon = lazy(() => import('../../../assets/icons/icon-hamburger.svg?react'))
+const CloseIcon = lazy(() => import('../../../assets/icons/icon-close.svg?react'))
 const EtsyIcon = lazy(() => import('../../../assets/icons/icon-etsy.svg?react'))
 const InstagramIcon = lazy(() => import('../../../assets/icons/icon-instagram.svg?react'))
 
@@ -9,10 +11,12 @@ interface IconProps {
   className?: string
 }
 
-type IconName = 'etsy' | 'instagram'
+type IconName = 'hamburger' | 'close' | 'etsy' | 'instagram'
 type IconComponentType = React.FC<React.SVGProps<SVGSVGElement>>
 
 const iconNameToComponent: Record<IconName, IconComponentType> = {
+  close: CloseIcon,
+  hamburger: HamburgerIcon,
   etsy: EtsyIcon,
   instagram: InstagramIcon,
 }

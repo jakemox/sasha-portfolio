@@ -35,10 +35,10 @@ const paddingStyles = css`
   }
 `
 
-// const containerStyles = css`
-//   ${baseContainerStyles};
-//   ${paddingStyles};
-// `
+export const containerStyles = css`
+  ${baseContainerStyles};
+  ${paddingStyles};
+`
 
 const BaseContainer = styled.div<{ noMargin: boolean }>`
   ${baseContainerStyles}

@@ -1,1 +1,1 @@
-export const isPreview = !import.meta.env.PROD
+export const isPreview = import.meta.env.DEV

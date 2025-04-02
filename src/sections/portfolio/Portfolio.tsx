@@ -24,6 +24,8 @@ interface PortfolioProps {
 }
 
 const Portfolio: FC<PortfolioProps> = ({ id }) => {
+  console.log(isPreview)
+
   const [lightboxIndex, setLightboxIndex] = useState<number>(0)
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false)
 

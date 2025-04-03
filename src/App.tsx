@@ -1,9 +1,8 @@
 import { type FC, Suspense, useEffect, useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { ApolloProvider, useSuspenseQuery } from '@apollo/client'
 import createApolloClient from './lib/apolloClient'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router'
 import Page from './containers/Page/Page'
 import Header from './components/common/header/Header'
 import Footer from './components/common/footer/Footer'
@@ -40,9 +39,7 @@ function App() {
         <AppContainer>
           <Header />
           <Suspense fallback={<LoadingOverlay />}>
-            <Switch>
-              <PageRoutes />
-            </Switch>
+            <PageRoutes />
             <Footer />
           </Suspense>
         </AppContainer>
@@ -51,7 +48,7 @@ function App() {
   )
 }
 
-const PageRoutes = () => {
+const PageRoutes: FC = () => {
   const { data, error } = useSuspenseQuery<PagesQuery, PagesQueryVariables>(PagesDocument, {
     variables: {
       preview: isPreview,
@@ -63,15 +60,11 @@ const PageRoutes = () => {
   if (!data?.pageCollection?.items?.length) return null
 
   return (
-    <>
+    <Routes>
       {data.pageCollection.items.map(({ sys, slug, path }) => {
-        return (
-          <Route key={slug} exact={slug === 'home-page'} path={path}>
-            <Page id={sys.id} />
-          </Route>
-        )
+        return <Route key={slug} path={path} element={<Page id={sys.id} />} />
       })}
-    </>
+    </Routes>
   )
 }
 

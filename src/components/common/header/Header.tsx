@@ -1,5 +1,6 @@
 import { useState, type FC } from 'react'
 import styled from '@emotion/styled'
+import { FocusTrap } from 'focus-trap-react'
 import Link, { isExternalLink } from '../../ctas/Link'
 import { useQuery } from '@apollo/client'
 import { isPreview } from '../../../constants/constants'
@@ -52,6 +53,7 @@ const Header: FC = () => {
               closeMenuOnMobile()
             }
           }}
+          tabIndex={isMobileViewport && !menuOpen ? -1 : 0}
         >
           {text}
         </NavLink>
@@ -60,24 +62,33 @@ const Header: FC = () => {
 
   return (
     <StyledHeader>
-      <Navigation element="nav">
-        <Link href="/" onClick={closeMenuOnMobile}>
-          {logo && <Logo src={logo.url} alt={logo.description} />}
-        </Link>
-        <MenuButton
-          onClick={toggleMenu}
-          icon={menuOpen ? 'close' : 'hamburger'}
-          iconOnly
-          size="sm"
-          variant="ghost"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        />
-        <DesktopNav>{renderNavLinks()}</DesktopNav>
-        <MobileNav isOpen={menuOpen} onClick={toggleMenu}>
-          <MobileNavList onClick={(e) => e.stopPropagation()}>{renderNavLinks()}</MobileNavList>
-        </MobileNav>
-      </Navigation>
+      <FocusTrap
+        active={menuOpen}
+        focusTrapOptions={{
+          escapeDeactivates: true,
+          clickOutsideDeactivates: true,
+          onDeactivate: closeMenuOnMobile,
+        }}
+      >
+        <Navigation element="nav">
+          <Link href="/" onClick={closeMenuOnMobile}>
+            {logo && <Logo src={logo.url} alt={logo.description} />}
+          </Link>
+          <MenuButton
+            onClick={toggleMenu}
+            icon={menuOpen ? 'close' : 'hamburger'}
+            iconOnly
+            size="sm"
+            variant="ghost"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          />
+          <DesktopNav>{renderNavLinks()}</DesktopNav>
+          <MobileNav isOpen={menuOpen} onClick={toggleMenu}>
+            <MobileNavList onClick={(e) => e.stopPropagation()}>{renderNavLinks()}</MobileNavList>
+          </MobileNav>
+        </Navigation>
+      </FocusTrap>
     </StyledHeader>
   )
 }

@@ -46,6 +46,7 @@ const Header: FC = () => {
       <li key={i}>
         <NavLink
           href={url}
+          navLink
           onClick={() => {
             if (!isExternalLink(url)) {
               closeMenuOnMobile()

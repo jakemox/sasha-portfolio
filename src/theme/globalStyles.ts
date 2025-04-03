@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import baseTheme from './baseTheme'
+import CustomCursor from '../assets/cursor.png'
 
 const globalStyles = css`
   * {
@@ -22,6 +23,7 @@ const globalStyles = css`
     font-size: ${baseTheme.typography.fontSizes.base};
     line-height: ${baseTheme.typography.lineHeights.base};
     color: ${baseTheme.colors.text.primary};
+    cursor: url(${CustomCursor}), auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

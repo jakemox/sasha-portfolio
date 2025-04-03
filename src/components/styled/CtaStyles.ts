@@ -73,7 +73,10 @@ export const buttonStyles = ({ variant = 'solid', size, iconOnly }: CTAProps) =>
       background-color: ${colorHover};
     }
 
-    /* TODO Focus states */
+    &:focus-visible {
+      outline: solid currentColor 2px;
+      outline-offset: 0.2em;
+    }
   `
 }
 

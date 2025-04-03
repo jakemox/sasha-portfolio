@@ -1,5 +1,5 @@
 import type { AnchorHTMLAttributes, FC, PropsWithChildren } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, NavLink as RouterNavLink } from 'react-router'
 import styled from '@emotion/styled'
 import { buttonStyles, linkStyles } from '../styled/CtaStyles'
 import Icon from '../common/icon/Icon'
@@ -8,6 +8,7 @@ import type { CTAProps } from '../styled/CtaStyles'
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>, CTAProps {
   icon?: string
   asButtonStyle?: boolean
+  navLink?: boolean
 }
 
 const Link: FC<PropsWithChildren<LinkProps>> = ({
@@ -16,20 +17,13 @@ const Link: FC<PropsWithChildren<LinkProps>> = ({
   icon,
   iconOnly = false,
   asButtonStyle = false,
+  navLink = false,
   children,
   ...rest
 }) => {
-  const commonProps = {
-    variant,
-    iconOnly,
-    asButton: asButtonStyle,
-    ...rest,
-  }
+  if (!href) return null
 
-  const isExternal =
-    href.toString().startsWith('http') ||
-    href.toString().startsWith('mailto') ||
-    href.toString().startsWith('tel')
+  const isExternal = isExternalLink(href)
 
   const linkContent = (
     <>
@@ -38,27 +32,30 @@ const Link: FC<PropsWithChildren<LinkProps>> = ({
     </>
   )
 
-  return isExternal ? (
-    <ExternalLink href={href} target="_blank" rel="noopener noreferrer" {...commonProps}>
+  const LinkComponent = isExternalLink(href) ? 'a' : navLink ? RouterNavLink : RouterLink
+
+  return (
+    <LinkComponent
+      href={isExternal ? href : undefined}
+      to={!isExternal ? href : undefined}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
+      {...rest}
+    >
       {linkContent}
-    </ExternalLink>
-  ) : (
-    <StyledLink to={href} {...commonProps}>
-      {linkContent}
-    </StyledLink>
+    </LinkComponent>
   )
 }
 
-export default Link
+export const isExternalLink = (href: string) =>
+  href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')
 
 interface StyledLinkProps extends CTAProps {
   asButton?: boolean
 }
 
-const StyledLink = styled(RouterLink, {
+export default styled(Link, {
   shouldForwardProp: (prop) => !['asButton', 'iconOnly'].includes(prop),
 })<StyledLinkProps>`
   ${({ asButton, ...rest }) => (asButton ? buttonStyles(rest) : linkStyles(rest))}
 `
-
-const ExternalLink = StyledLink.withComponent('a')

@@ -1,7 +1,7 @@
-import { useEffect, useState, type FC } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useState, type FC } from 'react'
 import styled from '@emotion/styled'
-import Link from '../../ctas/Link'
+import { FocusTrap } from 'focus-trap-react'
+import Link, { isExternalLink } from '../../ctas/Link'
 import { useQuery } from '@apollo/client'
 import { isPreview } from '../../../constants/constants'
 import { themeColors } from '../../../theme/colors'
@@ -10,14 +10,29 @@ import { breakpoints } from '../../../theme/breakpoints'
 import { HeaderDocument } from '../../../gql/generated/graphql'
 import type { HeaderQuery, HeaderQueryVariables } from '../../../gql/generated/graphql'
 import Button from '../../ctas/Button'
+import useWindowSizeThrottled from '../../../hooks/useWindowSizeThrottled'
 
 const Header: FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
-  const { pathname } = useLocation()
+  const [isMobileViewport, setIsMobileViewport] = useState<boolean>(true)
 
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
+  useWindowSizeThrottled((dimensions) => {
+    if (dimensions?.width) {
+      if (dimensions.width > parseInt(breakpoints.md.minWidth)) {
+        setIsMobileViewport(false)
+      } else {
+        setIsMobileViewport(true)
+      }
+    }
+  })
+
+  const toggleMenu = () => setMenuOpen(!menuOpen)
+
+  const closeMenuOnMobile = () => {
+    if (isMobileViewport) {
+      setMenuOpen(false)
+    }
+  }
 
   const { data } = useQuery<HeaderQuery, HeaderQueryVariables>(HeaderDocument, {
     variables: { limit: 1, preview: isPreview },
@@ -27,35 +42,53 @@ const Header: FC = () => {
 
   const navLinks = navigationLinksCollection?.items ?? []
 
-  const handleMenuButton = () => {
-    setMenuOpen(!menuOpen)
-  }
-
   const renderNavLinks = () =>
     navLinks.map(({ url, text }, i) => (
       <li key={i}>
-        <NavLink href={url}>{text}</NavLink>
+        <NavLink
+          href={url}
+          navLink
+          onClick={() => {
+            if (!isExternalLink(url)) {
+              closeMenuOnMobile()
+            }
+          }}
+          tabIndex={isMobileViewport && !menuOpen ? -1 : 0}
+        >
+          {text}
+        </NavLink>
       </li>
     ))
 
   return (
     <StyledHeader>
-      <Navigation element="nav">
-        <Link href="/">{logo && <Logo src={logo.url} alt={logo.description} />}</Link>
-        <MenuButton
-          onClick={handleMenuButton}
-          icon={menuOpen ? 'close' : 'hamburger'}
-          iconOnly
-          size="sm"
-          variant="ghost"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        />
-        <DesktopNav>{renderNavLinks()}</DesktopNav>
-        <MobileNav isOpen={menuOpen}>
-          <MobileNavList>{renderNavLinks()}</MobileNavList>
-        </MobileNav>
-      </Navigation>
+      <FocusTrap
+        active={menuOpen}
+        focusTrapOptions={{
+          escapeDeactivates: true,
+          clickOutsideDeactivates: true,
+          onDeactivate: closeMenuOnMobile,
+        }}
+      >
+        <Navigation element="nav">
+          <Link href="/" onClick={closeMenuOnMobile}>
+            {logo && <Logo src={logo.url} alt={logo.description} />}
+          </Link>
+          <MenuButton
+            onClick={toggleMenu}
+            icon={menuOpen ? 'close' : 'hamburger'}
+            iconOnly
+            size="sm"
+            variant="ghost"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          />
+          <DesktopNav>{renderNavLinks()}</DesktopNav>
+          <MobileNav isOpen={menuOpen} onClick={toggleMenu}>
+            <MobileNavList onClick={(e) => e.stopPropagation()}>{renderNavLinks()}</MobileNavList>
+          </MobileNav>
+        </Navigation>
+      </FocusTrap>
     </StyledHeader>
   )
 }
@@ -120,10 +153,10 @@ const MobileNav = styled('div', { shouldForwardProp: (prop) => prop !== 'isOpen'
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgb(from ${themeColors.bg.secondary} r g b / 40%);
+  background: rgb(from ${themeColors.bg.secondary} r g b / 50%);
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
-  pointer-events: ${({ isOpen }) => (isOpen ? 'all' : 'none')};
+  pointer-events: ${({ isOpen }) => (isOpen ? 'auto' : 'none')};
 
   @media (min-width: ${breakpoints.md.minWidth}) {
     display: none;
@@ -140,7 +173,6 @@ const MobileNavList = styled('ul')`
   list-style-type: none;
   padding-block-end: 1.5rem;
   transition: transform 0.3s ease-in-out;
-  pointer-events: all;
 
   li {
     padding-block: 0.75rem;
@@ -149,4 +181,5 @@ const MobileNavList = styled('ul')`
 
 const NavLink = styled(Link)`
   display: block;
+  width: 100%;
 `

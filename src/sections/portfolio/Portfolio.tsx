@@ -1,7 +1,6 @@
 import { useState, type FC } from 'react'
 import { useSuspenseQuery } from '@apollo/client'
 import styled from '@emotion/styled'
-// import { motion, stagger } from 'motion/react'
 import Lightbox from 'yet-another-react-lightbox'
 import { breakpoints } from '../../theme/breakpoints'
 import { isPreview } from '../../constants/constants'
@@ -107,6 +106,13 @@ const ImageButton = styled(Button, { shouldForwardProp: (prop) => prop !== 'cols
 
   picture {
     height: 100%;
+  }
+
+  :hover {
+    img {
+      transform: scale(1.1);
+      transition: transform 0.5s ease-in-out;
+    }
   }
 `
 

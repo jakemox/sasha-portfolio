@@ -10,6 +10,9 @@ query footer($limit: Int!, $preview: Boolean!) {
       copyrightText {
         text
       }
+      backgroundImage {
+        url
+      }
     }
   }
 }

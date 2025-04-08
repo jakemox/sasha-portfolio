@@ -18,6 +18,7 @@ import PortfolioImage from './PortfolioImage'
 import { FragmentType, useFragment } from '../../gql/generated'
 import Image from '../../components/common/image/Image'
 
+// TODO Generic SectionProps?
 interface PortfolioProps {
   id: string
 }
@@ -48,7 +49,7 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
 
   return portfolioItemsCollection ? (
     <>
-      <Container element="section">
+      <StyledContainer element="section">
         <Row spacing={1}>
           {portfolioItemsCollection.items.map(({ columns, portfolioImage }, i) => {
             if (portfolioImage) {
@@ -63,7 +64,7 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
             } else return null
           })}
         </Row>
-      </Container>
+      </StyledContainer>
       <Lightbox
         index={lightboxIndex}
         open={lightboxOpen}
@@ -93,6 +94,12 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
 }
 
 export default Portfolio
+
+// TODO Make section styles in contentful
+const StyledContainer = styled(Container)`
+  padding-block-start: 0.25rem;
+  padding-block-end: 3rem;
+`
 
 const ImageButton = styled(Button, { shouldForwardProp: (prop) => prop !== 'cols' })<{
   cols: number

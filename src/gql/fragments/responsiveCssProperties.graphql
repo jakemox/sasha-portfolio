@@ -1,0 +1,20 @@
+fragment ResponsiveCssPosition on ResponsiveCssPosition {
+  property
+  mobile
+  tablet
+  desktop
+}
+
+fragment ResponsiveCssSize on ResponsiveCssSize {
+  property
+  mobile
+  tablet
+  desktop
+}
+
+fragment ResponsiveCssMedia on ResponsiveCssMedia {
+  property
+  mobile
+  tablet
+  desktop
+}

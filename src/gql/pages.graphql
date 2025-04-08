@@ -27,6 +27,12 @@ query Page($preview: Boolean!, $id: String!) {
           }
           __typename
         }
+        ... on AnimatedSection {
+          sys {
+            id
+          }
+          __typename
+        }
       }
     }
   }

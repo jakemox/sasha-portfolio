@@ -40,7 +40,7 @@ export const themeColors: ThemeColors = {
   text: {
     primary: darkBrown,
     inverse: neutral0,
-    secondary: purple,
+    secondary: pink,
     disabled: neutral40,
   },
   bg: {
@@ -52,7 +52,7 @@ export const themeColors: ThemeColors = {
     primary: darkBrown,
     inverse: neutral0,
     disabled: neutral40,
-    accent: purple,
+    accent: pink,
   },
   button: {
     primary: {

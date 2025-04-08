@@ -1,10 +1,11 @@
+import type { FC } from 'react'
 import { useSuspenseQuery } from '@apollo/client'
 import styled from '@emotion/styled'
 import { isPreview } from '../../constants/constants'
-import { ImageAndTextSectionDocument } from '../../gql/generated/graphql'
-import type {
-  ImageAndTextSectionQuery,
-  ImageAndTextSectionQueryVariables,
+import {
+  ImageAndTextSectionDocument,
+  type ImageAndTextSectionQuery,
+  type ImageAndTextSectionQueryVariables,
 } from '../../gql/generated/graphql'
 import Container from '../../components/common/grid/Container'
 import Row from '../../components/common/grid/Row'
@@ -14,8 +15,12 @@ import RichText from '../../richTextOptions'
 import Image from '../../components/common/image/Image'
 import type { ContentfulImageApiParams } from '../../lib/contentfulImage'
 
+interface ImageAndTextProps {
+  id: string
+}
+
 // TODO Turn this into generic 2 column layout?
-const ImageAndText = ({ id }) => {
+const ImageAndText: FC<ImageAndTextProps> = ({ id }) => {
   const { data } = useSuspenseQuery<ImageAndTextSectionQuery, ImageAndTextSectionQueryVariables>(
     ImageAndTextSectionDocument,
     {
@@ -31,7 +36,7 @@ const ImageAndText = ({ id }) => {
   const { image, focusArea: imageFocusArea } = imageWrapper || {}
 
   return (
-    <Container element="section">
+    <StyledContainer element="section">
       <StyledRow>
         <Cell block cols={image ? { sm: 9, md: 6, lg: 7 } : {}}>
           {heading && (
@@ -51,11 +56,16 @@ const ImageAndText = ({ id }) => {
           </Cell>
         )}
       </StyledRow>
-    </Container>
+    </StyledContainer>
   )
 }
 
 export default ImageAndText
+
+const StyledContainer = styled(Container)`
+  padding-block-start: 0.5rem;
+  padding-block-end: 3rem;
+`
 
 const StyledRow = styled(Row)`
   justify-content: center;

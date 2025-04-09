@@ -1,0 +1,41 @@
+#import "./fragments/responsiveCssProperties.graphql"
+
+query AnimatedSection($preview: Boolean!, $id: String!) {
+  animatedSection(preview: $preview, id: $id) {
+    imageSetCollection {
+      items {
+        ...AnimatedImage
+      }
+    }
+    responsiveSectionHeightCollection {
+      items {
+        ...ResponsiveCssSize
+      }
+    }
+    mediaResponsiveMargin {
+      ...ResponsiveCssMargin
+    }
+  }
+}
+
+fragment AnimatedImage on AnimatedImage {
+  image {
+    url
+  }
+  positionStylesCollection {
+    items {
+      ...ResponsiveCssPosition
+    }
+  }
+  sizeStylesCollection {
+    items {
+      ...ResponsiveCssSize
+    }
+  }
+  mediaStylesCollection {
+    items {
+      ...ResponsiveCssMedia
+    }
+  }
+  animationStyle
+}

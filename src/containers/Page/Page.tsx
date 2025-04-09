@@ -6,6 +6,7 @@ import type { PageQuery, PageQueryVariables } from '../../gql/generated/graphql'
 
 const Portfolio = lazy(() => import('../../sections/portfolio/Portfolio'))
 const ImageAndText = lazy(() => import('../../sections/imageAndText/ImageAndText'))
+const AnimatedSection = lazy(() => import('../../sections/animatedSection/AnimatedSection'))
 
 interface PageProps {
   id: string
@@ -59,6 +60,8 @@ const typenameToComponent = (typename: string): FC<{ id: string }> | null => {
       return Portfolio
     case 'ImageAndText':
       return ImageAndText
+    case 'AnimatedSection':
+      return AnimatedSection
     default:
       return null
   }

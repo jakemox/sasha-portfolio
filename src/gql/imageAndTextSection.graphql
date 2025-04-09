@@ -1,4 +1,5 @@
 #import "./fragments/richTextFragment.graphql"
+#import "./fragments/responsiveCssProperties.graphql"
 
 query ImageAndTextSection($preview: Boolean!, $id: String!) {
   imageAndText(preview: $preview, id: $id) {
@@ -14,6 +15,9 @@ query ImageAndTextSection($preview: Boolean!, $id: String!) {
         url
       }
       focusArea
+    }
+    mediaResponsiveMargin {
+      ...ResponsiveCssMargin
     }
   }
 }

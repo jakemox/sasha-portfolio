@@ -2,8 +2,10 @@
 - CSS variables
 - Image 2x size and height/width
 - Button hover and focus effects
+- Responsive CSS properties
 - Accessibility
 - Testing
+- Tailwind node package
 - Migrate to Next or SSR?
 
 From Sasha:

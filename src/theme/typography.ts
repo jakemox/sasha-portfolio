@@ -15,6 +15,7 @@ const underlineAnimation = keyframes`
 
 const headingStyles = {
   fontFamily: '"Amarante", serif',
+  fontDisplay: 'optional',
   fontWeight: '400',
   lineHeight: '1.2',
   marginBottom: '0.35em',

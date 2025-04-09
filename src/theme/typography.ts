@@ -14,7 +14,8 @@ const underlineAnimation = keyframes`
 `
 
 const headingStyles = {
-  fontWeight: '500',
+  fontFamily: '"Amarante", serif',
+  fontWeight: '400',
   lineHeight: '1.2',
   marginBottom: '0.35em',
   color: themeColors.text.secondary,

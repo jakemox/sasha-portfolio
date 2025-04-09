@@ -11,6 +11,7 @@ import { PagesDocument, type PagesQuery, type PagesQueryVariables } from './gql/
 import 'yet-another-react-lightbox/styles.css'
 import LoadingOverlay from './components/LoadingOverlay'
 import '@fontsource-variable/jost'
+import '@fontsource/amarante'
 
 const AppContainer = styled.div`
   min-height: 100vh;

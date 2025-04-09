@@ -69,8 +69,10 @@ export const buttonStyles = ({ variant = 'solid', size, iconOnly }: CTAProps) =>
     overflow: hidden;
     cursor: pointer;
 
-    &:hover {
-      background-color: ${colorHover};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: ${colorHover};
+      }
     }
 
     &:focus-visible {
@@ -90,7 +92,8 @@ const defaultLinkStyles = css`
 const inlineLinkStyles = css`
   text-underline-offset: 0.125em;
 
-  &:hover {
+  &:hover,
+  &:active {
     text-decoration: solid underline currentColor;
   }
 
@@ -124,10 +127,8 @@ export const linkStyles = ({ variant, layout }: CTAProps) => {
       align-items: center;
     }
 
-    &:hover {
-      color: hsl(from ${textColor} h s calc(l - 10));
-    }
-
+    &:hover,
+    &:active,
     &:focus-visible {
       color: hsl(from ${textColor} h s calc(l - 10));
     }

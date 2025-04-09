@@ -67,6 +67,7 @@ const Header: FC = () => {
         focusTrapOptions={{
           escapeDeactivates: true,
           clickOutsideDeactivates: true,
+          initialFocus: false,
           onDeactivate: closeMenuOnMobile,
         }}
       >

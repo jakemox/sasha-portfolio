@@ -87,7 +87,7 @@ const AnimatedImageLayer: FC<AnimatedImageLayerProps> = ({ data }) => {
         }
       }
     },
-    { scope: imageRef },
+    { dependencies: [imageRef.current, isFloating], scope: imageRef },
   )
 
   return (

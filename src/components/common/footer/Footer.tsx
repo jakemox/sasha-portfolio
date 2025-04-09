@@ -85,11 +85,3 @@ const SocialIcons = styled.ul`
   list-style-type: none;
   gap: 1rem;
 `
-
-// const SocialIconLink = styled(Link)`
-//   /* TODO Move this to Link component? */
-//   transition: color 0.25s ease;
-//   /* &:hover {
-//     color: ${themeColors.icon.accent};
-//   } */
-// `

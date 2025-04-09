@@ -14,6 +14,7 @@ import Text from '../../components/styled/Text'
 import RichText from '../../richTextOptions'
 import Image from '../../components/common/image/Image'
 import type { ContentfulImageApiParams } from '../../lib/contentfulImage'
+import { useResponsiveCssProperties } from '../../hooks/useResponsiveCssProperties'
 
 interface ImageAndTextProps {
   id: string
@@ -31,12 +32,16 @@ const ImageAndText: FC<ImageAndTextProps> = ({ id }) => {
     },
   )
 
-  const { heading, body, imageWrapper } = data?.imageAndText || {}
+  const { heading, body, imageWrapper, mediaResponsiveMargin } = data?.imageAndText || {}
+
+  const ContainerWithMargin = useResponsiveCssProperties(Container, [mediaResponsiveMargin], {
+    margin: '0',
+  })
 
   const { image, focusArea: imageFocusArea } = imageWrapper || {}
 
   return (
-    <StyledContainer element="section">
+    <ContainerWithMargin element="section">
       <StyledRow>
         <Cell block cols={image ? { sm: 9, md: 6, lg: 7 } : {}}>
           {heading && (
@@ -56,16 +61,11 @@ const ImageAndText: FC<ImageAndTextProps> = ({ id }) => {
           </Cell>
         )}
       </StyledRow>
-    </StyledContainer>
+    </ContainerWithMargin>
   )
 }
 
 export default ImageAndText
-
-const StyledContainer = styled(Container)`
-  padding-block-start: 0.5rem;
-  padding-block-end: 3rem;
-`
 
 const StyledRow = styled(Row)`
   justify-content: center;

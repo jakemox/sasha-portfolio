@@ -17,6 +17,7 @@ import {
 import PortfolioImage from './PortfolioImage'
 import { FragmentType, useFragment } from '../../gql/generated'
 import Image from '../../components/common/image/Image'
+import { useResponsiveCssProperties } from '../../hooks/useResponsiveCssProperties'
 
 // TODO Generic SectionProps?
 interface PortfolioProps {
@@ -37,7 +38,12 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
     },
   )
 
-  const { portfolioItemsCollection } = data?.portfolio || {}
+  const { portfolioItemsCollection, mediaResponsiveMargin } = data?.portfolio || {}
+
+  const ContainerWithMargin = useResponsiveCssProperties(Container, [mediaResponsiveMargin], {
+    margin: '0',
+  })
+
   const imageData = (image: FragmentType<typeof ImageFragmentDoc>) => {
     return useFragment(ImageFragmentDoc, image)
   }
@@ -49,7 +55,7 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
 
   return portfolioItemsCollection ? (
     <>
-      <StyledContainer element="section">
+      <ContainerWithMargin element="section">
         <Row spacing={1}>
           {portfolioItemsCollection.items.map(({ columns, portfolioImage }, i) => {
             if (portfolioImage) {
@@ -64,7 +70,7 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
             } else return null
           })}
         </Row>
-      </StyledContainer>
+      </ContainerWithMargin>
       <Lightbox
         index={lightboxIndex}
         open={lightboxOpen}
@@ -94,12 +100,6 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
 }
 
 export default Portfolio
-
-// TODO Make section styles in contentful
-const StyledContainer = styled(Container)`
-  padding-block-start: 0.25rem;
-  padding-block-end: 3rem;
-`
 
 const ImageButton = styled(Button, { shouldForwardProp: (prop) => prop !== 'cols' })<{
   cols: number

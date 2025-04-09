@@ -1,13 +1,27 @@
 import { css, SerializedStyles } from '@emotion/react'
 import type {
-  ResponsiveCssMediaFragment,
+  ResponsiveCssMarginFragment,
   ResponsiveCssPositionFragment,
   ResponsiveCssSizeFragment,
+  ResponsiveCssMediaFragment,
 } from '../gql/generated/graphql'
 import { breakpoints } from '../theme/breakpoints'
 import { rejectNil } from '../lib/common'
 import { FC } from 'react'
 import styled, { StyledComponent } from '@emotion/styled'
+
+type MarginProperties =
+  | 'margin'
+  | 'margin-top'
+  | 'margin-right'
+  | 'margin-bottom'
+  | 'margin-left'
+  | 'margin-block'
+  | 'margin-block-start'
+  | 'margin-block-end'
+  | 'margin-inline'
+  | 'margin-inline-start'
+  | 'margin-inline-end'
 
 type PositionProperties = 'top' | 'right' | 'bottom' | 'left'
 
@@ -21,7 +35,11 @@ enum Viewports {
   DESKTOP = 'desktop',
 }
 
-type SupportedCssProperties = PositionProperties | SizeProperties | MediaProperties
+type SupportedCssProperties =
+  | MarginProperties
+  | PositionProperties
+  | SizeProperties
+  | MediaProperties
 
 type CssProperties = {
   [key in SupportedCssProperties]?: string
@@ -39,6 +57,7 @@ interface ResponsiveCssProperty {
 }
 
 export type SupportedCssPropertyFragments = (
+  | ResponsiveCssMarginFragment
   | ResponsiveCssPositionFragment
   | ResponsiveCssSizeFragment
   | ResponsiveCssMediaFragment

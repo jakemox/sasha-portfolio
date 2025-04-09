@@ -7,6 +7,14 @@ query AnimatedSection($preview: Boolean!, $id: String!) {
         ...AnimatedImage
       }
     }
+    responsiveSectionHeightCollection {
+      items {
+        ...ResponsiveCssSize
+      }
+    }
+    mediaResponsiveMargin {
+      ...ResponsiveCssMargin
+    }
   }
 }
 

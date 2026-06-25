@@ -4,7 +4,7 @@ import { breakpoints } from '../../../theme/breakpoints'
 
 type Breakpoint = 'xxs' | 'xs' | 'sm' | 'sm-landscape' | 'md' | 'lg' | 'xl'
 
-type Cols = Partial<Record<Breakpoint, number>>
+type Cols = Partial<Record<Breakpoint, number | null>>
 
 interface CellProps<T = HTMLOrSVGElement> extends HTMLAttributes<T> {
   element?: keyof JSX.IntrinsicElements
@@ -38,22 +38,25 @@ interface BaseCellProps {
   block?: boolean
 }
 
-const generateResponsiveStyles = (property: 'cols' | 'offset', values: Cols) => {
-  const colsStyle = (value: number) => `flex-basis: calc(100% / 12 * ${value});`
-  const offsetStyle = (value: number) => `margin-inline-start: calc(100% / 12 * ${value});`
+const responsiveStyleConfig = {
+  cols: (value: number) => `flex-basis: calc(100% / 12 * ${value});`,
+  offset: (value: number) => `margin-inline-start: calc(100% / 12 * ${value});`,
+}
 
+const generateResponsiveStyles = (property: 'cols' | 'offset', values: Cols) => {
   return Object.entries(values)
     .map(([bp, value]) => {
+      if (value === null) return ''
+
+      const styles = responsiveStyleConfig[property](value)
       const breakpoint = breakpoints[bp]
-      const styles = property === 'cols' ? colsStyle(value) : offsetStyle(value)
 
       return breakpoint.minWidth === null
         ? styles
-        : `
-        @media (min-width: ${breakpoints[bp].minWidth}) {
-          ${styles}
-        }        
-      `
+        : ` @media (min-width: ${breakpoint.minWidth}) {
+              ${styles}
+            }        
+          `
     })
     .join('\n')
 }
@@ -69,6 +72,6 @@ export const BaseCell = styled('div', {
 
   ${({ offset }) =>
     typeof offset === 'number'
-      ? `margin-left: calc(100% / 12 * ${offset});`
+      ? `margin-inline-start: calc(100% / 12 * ${offset});`
       : offset && generateResponsiveStyles('offset', offset)}
 `

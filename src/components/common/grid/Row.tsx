@@ -23,15 +23,7 @@ type SectionRowProps = {
 
 type RowProps = (DivRowProps | SectionRowProps) & BaseRowProps
 
-const Row: FC<RowProps> = ({
-  element,
-  reverse,
-  fullWidth,
-  spacing = 5,
-  rowRef,
-  children,
-  ...attr
-}) => {
+const Row: FC<RowProps> = ({ element, reverse, fullWidth, spacing, rowRef, children, ...attr }) => {
   const { className, ...rest } = attr
 
   return (
@@ -81,6 +73,6 @@ const BaseRow = styled('div', {
   flex-direction: ${({ reverse }) => (reverse ? 'row-reverse' : 'row')};
   flex-wrap: wrap;
 
-  ${({ spacing }) => generateResponsiveGutters(spacing)}
+  ${({ spacing }) => generateResponsiveGutters(spacing ?? 5)}
   ${({ fullWidth }) => fullWidth && 'width: 100%;'}
 `

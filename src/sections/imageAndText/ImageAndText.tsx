@@ -49,13 +49,13 @@ const ImageAndText: FC<ImageAndTextProps> = ({ id }) => {
               {heading.text}
             </Text>
           )}
-          {body && <RichText data={body} />}
+          {body && <RichText {...body} />}
         </Cell>
-        {image && (
+        {image?.url && (
           <Cell cols={{ xs: 12, sm: 9, md: 6, lg: 5 }}>
             <StyledImage
               src={image.url}
-              alt={image.title}
+              alt={image.title || ''}
               contentfulApiParams={{ f: imageFocusArea as ContentfulImageApiParams['f'] }}
             />
           </Cell>

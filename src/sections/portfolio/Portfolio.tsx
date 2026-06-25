@@ -9,15 +9,14 @@ import Row from '../../components/common/grid/Row'
 import Cell from '../../components/common/grid/Cell'
 import Button from '../../components/ctas/Button'
 import {
-  ImageFragmentDoc,
   PortfolioSectionDocument,
   type PortfolioSectionQuery,
   type PortfolioSectionQueryVariables,
 } from '../../gql/generated/graphql'
 import PortfolioImage from './PortfolioImage'
-import { FragmentType, useFragment } from '../../gql/generated'
 import Image from '../../components/common/image/Image'
-import { useResponsiveCssProperties } from '../../hooks/useResponsiveCssProperties'
+import { getResponsiveCssProperties } from '../../hooks/useResponsiveCssProperties'
+import { SerializedStyles } from '@emotion/react'
 
 // TODO Generic SectionProps?
 interface PortfolioProps {
@@ -40,46 +39,43 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
 
   const { portfolioItemsCollection, mediaResponsiveMargin } = data?.portfolio || {}
 
-  const ContainerWithMargin = useResponsiveCssProperties(Container, [mediaResponsiveMargin], {
+  const responsiveCssProperties = getResponsiveCssProperties([mediaResponsiveMargin], {
     margin: '0',
   })
-
-  const imageData = (image: FragmentType<typeof ImageFragmentDoc>) => {
-    return useFragment(ImageFragmentDoc, image)
-  }
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index)
     setLightboxOpen(true)
   }
 
-  return portfolioItemsCollection ? (
+  return !!portfolioItemsCollection?.items?.length ? (
     <>
-      <ContainerWithMargin element="section">
-        <Row spacing={1}>
-          {portfolioItemsCollection.items.map(({ columns, portfolioImage }, i) => {
-            if (portfolioImage) {
-              const data = imageData(portfolioImage)
-              return (
-                <Cell cols={{ xxs: 12, sm: columns }} key={i}>
-                  <ImageButton asLinkStyle cols={columns} onClick={() => openLightbox(i)}>
-                    <PortfolioImage data={data} />
-                  </ImageButton>
-                </Cell>
-              )
-            } else return null
-          })}
-        </Row>
-      </ContainerWithMargin>
+      <PortfolioSection responsiveCssProperties={responsiveCssProperties}>
+        <Container>
+          <Row spacing={1}>
+            {portfolioItemsCollection.items.map((item, i) => {
+              const { portfolioImage, columns } = item || {}
+              if (portfolioImage) {
+                return (
+                  <Cell cols={{ xxs: 12, sm: columns }} key={i}>
+                    <ImageButton asLinkStyle cols={columns} onClick={() => openLightbox(i)}>
+                      <PortfolioImage data={portfolioImage} />
+                    </ImageButton>
+                  </Cell>
+                )
+              } else return null
+            })}
+          </Row>
+        </Container>
+      </PortfolioSection>
       <Lightbox
         index={lightboxIndex}
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
-        slides={portfolioItemsCollection.items.map(({ portfolioImage }) => {
-          const { url, title } = imageData(portfolioImage).image
+        slides={portfolioItemsCollection.items.map((item) => {
           return {
-            src: url,
-            alt: title,
+            src: item?.portfolioImage?.image?.url || '',
+            alt: item?.portfolioImage?.image?.title || '',
           }
         })}
         render={{
@@ -101,18 +97,35 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
 
 export default Portfolio
 
+const PortfolioSection = styled('section', {
+  shouldForwardProp: (prop) => prop !== 'responsiveCssProperties',
+})<{ responsiveCssProperties?: SerializedStyles | string }>`
+  ${({ responsiveCssProperties }) => responsiveCssProperties}
+`
+
 const ImageButton = styled(Button, { shouldForwardProp: (prop) => prop !== 'cols' })<{
-  cols: number
+  cols?: number | null
 }>`
   width: 100%;
   height: auto;
+  overflow: hidden;
 
   @media (min-width: ${breakpoints.sm.minWidth}) {
-    aspect-ratio: ${({ cols }) => `${cols} / 5`};
+    aspect-ratio: ${({ cols }) => `${cols || 12} / 5`};
   }
 
   picture {
+    display: block;
+    width: 100%;
     height: 100%;
+    overflow: hidden;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   :hover {

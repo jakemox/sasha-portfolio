@@ -8,6 +8,8 @@ export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 const Image = forwardRef<HTMLImageElement, ImageProps>(
   ({ src, alt, contentfulApiParams, ...rest }, ref) => {
+    if (!src) return null
+
     const { src1x, src1xWebP, src1xAvif } = getMultipleImageSrc(src, contentfulApiParams)
 
     return (

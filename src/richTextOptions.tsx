@@ -5,13 +5,7 @@ import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import styled from '@emotion/styled'
 import Link from './components/ctas/Link'
 import Text from './components/styled/Text'
-import { RichTextFragmentDoc } from './gql/generated/graphql'
-import { useFragment } from './gql/generated'
-import type { FragmentType } from './gql/generated'
-
-interface RichTextTypes {
-  data: FragmentType<typeof RichTextFragmentDoc>
-}
+import { RichTextFragment } from './gql/generated/graphql'
 
 const options: {
   renderNode: Record<string, (node: Node, children: ReactNode) => JSX.Element>
@@ -32,10 +26,9 @@ const options: {
   },
 }
 
-const RichText: FC<RichTextTypes> = ({ data }) => {
-  const textData = useFragment(RichTextFragmentDoc, data)
-
-  return <>{documentToReactComponents(textData.text.json, options)}</>
+const RichText: FC<RichTextFragment> = ({ text }) => {
+  if (!text?.json) return null
+  return <>{documentToReactComponents(text.json, options)}</>
 }
 
 export default RichText

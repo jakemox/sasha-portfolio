@@ -64,7 +64,7 @@ const PageRoutes: FC = () => {
     <Routes>
       {data.pageCollection.items.map((page) => {
         if (!page?.path) return null
-        return <Route key={page.slug} path={page.path} element={<Page id={page.sys.id} />} />
+        return <Route key={page.sys.id} path={page.path} element={<Page id={page.sys.id} />} />
       })}
     </Routes>
   )

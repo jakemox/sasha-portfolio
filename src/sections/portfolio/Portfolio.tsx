@@ -48,7 +48,7 @@ const Portfolio: FC<PortfolioProps> = ({ id }) => {
     setLightboxOpen(true)
   }
 
-  return !!portfolioItemsCollection?.items.length ? (
+  return !!portfolioItemsCollection?.items?.length ? (
     <>
       <PortfolioSection responsiveCssProperties={responsiveCssProperties}>
         <Container>

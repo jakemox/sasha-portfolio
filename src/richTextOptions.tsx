@@ -27,7 +27,8 @@ const options: {
 }
 
 const RichText: FC<RichTextFragment> = ({ text }) => {
-  return <>{documentToReactComponents(text?.json, options)}</>
+  if (!text?.json) return null
+  return <>{documentToReactComponents(text.json, options)}</>
 }
 
 export default RichText

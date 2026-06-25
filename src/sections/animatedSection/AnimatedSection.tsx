@@ -26,14 +26,14 @@ const AnimatedSection: FC<AnimatedSectionProps> = ({ id }) => {
     data?.animatedSection || {}
 
   const ContainerWithHeightAndMargin = useResponsiveCssProperties(Container, [
-    ...(responsiveSectionHeightCollection.items || []),
+    ...(responsiveSectionHeightCollection?.items || []),
     mediaResponsiveMargin,
   ])
 
   return imageSetCollection ? (
     <ContainerWithHeightAndMargin element="section" noMargin>
       {imageSetCollection.items.map((data, i) => {
-        return <AnimatedImageLayer key={i} data={data} />
+        return <AnimatedImageLayer key={i} {...data} />
       })}
     </ContainerWithHeightAndMargin>
   ) : null

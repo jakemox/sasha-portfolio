@@ -19,18 +19,27 @@ const Footer: FC = () => {
 
   return (
     <FooterContainer backgroundImage={backgroundImage && backgroundImage.url}>
-      <StyledContainer>
-        <SocialIcons>
-          {socialMediaLinksCollection?.items.map(({ socialMediaSite, url }, i) => (
-            <li key={i}>
-              <Link href={url} icon={socialMediaSite.toLowerCase()} iconOnly />
-            </li>
-          ))}
-        </SocialIcons>
-        {copyrightText && (
-          <p>{copyrightText.text.replace('{{date}}', String(new Date().getFullYear()))}</p>
-        )}
-      </StyledContainer>
+      {(socialMediaLinksCollection?.items || copyrightText?.text) && (
+        <StyledContainer>
+          {socialMediaLinksCollection?.items.length && (
+            <SocialIcons>
+              {socialMediaLinksCollection.items.map((item, i) => (
+                <li key={i}>
+                  <Link
+                    href={item?.url || ''}
+                    icon={item?.socialMediaSite?.toLowerCase()}
+                    iconOnly
+                    aria-label={item?.socialMediaSite || 'Social media link'}
+                  />
+                </li>
+              ))}
+            </SocialIcons>
+          )}
+          {copyrightText?.text && (
+            <p>{copyrightText.text.replace('{{date}}', String(new Date().getFullYear()))}</p>
+          )}
+        </StyledContainer>
+      )}
     </FooterContainer>
   )
 }
@@ -38,7 +47,7 @@ const Footer: FC = () => {
 export default Footer
 
 interface FooterContainerProps {
-  backgroundImage?: string
+  backgroundImage?: string | null
 }
 
 // TODO move some styles to Contentful

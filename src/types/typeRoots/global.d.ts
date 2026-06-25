@@ -3,3 +3,6 @@ declare module '*.svg?react' {
   const ReactComponent: FC<SVGProps<SVGSVGElement>>
   export default ReactComponent
 }
+declare module '*.css'
+declare module '@fontsource/*' {}
+declare module '@fontsource-variable/*' {}

@@ -18,7 +18,7 @@ const Header: FC = () => {
 
   useWindowSizeThrottled((dimensions) => {
     if (dimensions?.width) {
-      if (dimensions.width > parseInt(breakpoints.md.minWidth)) {
+      if (dimensions.width > parseInt(breakpoints.md.minWidth || '0')) {
         setIsMobileViewport(false)
       } else {
         setIsMobileViewport(true)
@@ -42,14 +42,15 @@ const Header: FC = () => {
 
   const navLinks = navigationLinksCollection?.items ?? []
 
-  const renderNavLinks = () =>
-    navLinks.map(({ url, text }, i) => (
+  const NavLinks = navLinks.map((item, i) => {
+    const { url, text } = item || {}
+    return (
       <li key={i}>
         <NavLink
-          href={url}
+          href={url || ''}
           navLink
           onClick={() => {
-            if (!isExternalLink(url)) {
+            if (!isExternalLink(url || '')) {
               closeMenuOnMobile()
             }
           }}
@@ -58,7 +59,8 @@ const Header: FC = () => {
           {text}
         </NavLink>
       </li>
-    ))
+    )
+  })
 
   return (
     <StyledHeader>
@@ -72,22 +74,28 @@ const Header: FC = () => {
         }}
       >
         <Navigation element="nav">
-          <Link href="/" onClick={closeMenuOnMobile}>
-            {logo && <Logo src={logo.url} alt={logo.description} />}
-          </Link>
-          <MenuButton
-            onClick={toggleMenu}
-            icon={menuOpen ? 'close' : 'hamburger'}
-            iconOnly
-            size="sm"
-            variant="ghost"
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-          />
-          <DesktopNav>{renderNavLinks()}</DesktopNav>
-          <MobileNav isOpen={menuOpen} onClick={toggleMenu}>
-            <MobileNavList onClick={(e) => e.stopPropagation()}>{renderNavLinks()}</MobileNavList>
-          </MobileNav>
+          {logo?.url && (
+            <Link href="/" onClick={closeMenuOnMobile}>
+              {logo && <Logo src={logo.url} alt={logo.description || ''} />}
+            </Link>
+          )}
+          {navLinks.length > 0 && (
+            <>
+              <MenuButton
+                onClick={toggleMenu}
+                icon={menuOpen ? 'close' : 'hamburger'}
+                iconOnly
+                size="sm"
+                variant="ghost"
+                aria-label="Toggle menu"
+                aria-expanded={menuOpen}
+              />
+              <DesktopNav>{NavLinks}</DesktopNav>
+              <MobileNav isOpen={menuOpen} onClick={toggleMenu}>
+                <MobileNavList onClick={(e) => e.stopPropagation()}>{NavLinks}</MobileNavList>
+              </MobileNav>
+            </>
+          )}
         </Navigation>
       </FocusTrap>
     </StyledHeader>

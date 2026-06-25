@@ -28,8 +28,9 @@ const Page: FC<PageProps> = ({ id }) => {
 
   return (
     <>
-      {contentCollection.items.map(({ sys, __typename }, index) => {
-        return <Section key={index} id={sys.id} typename={__typename} />
+      {contentCollection?.items.map((item, index) => {
+        if (!item) return null
+        return <Section key={index} id={item.sys.id} typename={item.__typename} />
       })}
     </>
   )

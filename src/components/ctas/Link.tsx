@@ -32,18 +32,16 @@ const Link: FC<PropsWithChildren<LinkProps>> = ({
     </>
   )
 
-  const LinkComponent = isExternalLink(href) ? 'a' : navLink ? RouterNavLink : RouterLink
+  const RouterLinkComponent = navLink ? RouterNavLink : RouterLink
 
-  return (
-    <LinkComponent
-      href={isExternal ? href : undefined}
-      to={!isExternal ? href : undefined}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
-      {...rest}
-    >
+  return isExternal ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
       {linkContent}
-    </LinkComponent>
+    </a>
+  ) : (
+    <RouterLinkComponent to={href} {...rest}>
+      {linkContent}
+    </RouterLinkComponent>
   )
 }
 

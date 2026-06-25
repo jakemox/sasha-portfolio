@@ -17,16 +17,19 @@ const PortfolioImage: FC<PortfolioImageProps> = ({ data, ...rest }) => {
   const handleError = () => setIsLoaded(true)
 
   const { image, focusArea } = data
-  const { url, title, width, height } = image
+  const { url, title, width, height } = image || {}
+
   return (
     <StyledImage
-      src={url}
-      alt={title}
-      width={width}
-      height={height}
+      src={url || ''}
+      alt={title || ''}
+      width={width ?? undefined}
+      height={height ?? undefined}
+      // TODO Optimise image sizing to improve performance
       contentfulApiParams={{
         f: focusArea as ContentfulImageApiParams['f'],
       }}
+      // TODO Eager loading for images above the fold
       loading="lazy"
       onLoad={handleLoad}
       onError={handleError}

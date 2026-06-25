@@ -1,13 +1,7 @@
 import * as dotenv from 'dotenv'
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
-if (!process.env.CONTEXT) {
-  dotenv.config({ path: '.env.development' })
-} else {
-  dotenv.config({
-    path: process.env.CONTEXT === 'deploy-preview' ? '.env.preview' : '.env.production',
-  })
-}
+dotenv.config()
 
 const spaceId = process.env.CONTENTFUL_SPACE_ID
 const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN

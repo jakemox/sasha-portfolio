@@ -21,7 +21,7 @@ const Footer: FC = () => {
     <FooterContainer backgroundImage={backgroundImage && backgroundImage.url}>
       {((socialMediaLinksCollection?.items?.length ?? 0) > 0 || !!copyrightText?.text) && (
         <StyledContainer>
-          {(socialMediaLinksCollection?.items?.length ?? 0) > 0 && (
+          {socialMediaLinksCollection && socialMediaLinksCollection?.items.length > 0 && (
             <SocialIcons>
               {socialMediaLinksCollection.items.map((item, i) => (
                 <li key={i}>

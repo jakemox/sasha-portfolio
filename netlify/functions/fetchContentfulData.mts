@@ -15,6 +15,15 @@ export const handler = async (event: any) => {
       body: JSON.stringify({ query, variables }),
     })
 
+    if (!response.ok) {
+      return {
+        statusCode: response.status,
+        body: JSON.stringify({
+          error: `Contentful responded with ${response.status}: ${response.statusText}`,
+        }),
+      }
+    }
+
     const data = await response.json()
     return {
       statusCode: 200,

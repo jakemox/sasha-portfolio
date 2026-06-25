@@ -15,4 +15,4 @@
   VITE_ENV = "staging"
 
 [context.branch-deploy.environment]
-  VITE_ENV = "staging"
+  VITE_ENV = "prod"
